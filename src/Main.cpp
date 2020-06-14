@@ -19,7 +19,6 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		cout << "hhh";
 		Mat img = imread(command, IMREAD_COLOR);
 		Mat grey(img.rows, img.cols, CV_8UC3);
 		cvtColor(img, grey, COLOR_BGR2GRAY);
