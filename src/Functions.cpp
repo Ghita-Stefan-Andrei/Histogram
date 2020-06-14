@@ -12,7 +12,7 @@ double f_max(vector<int> v)
 	return max;
 }
 
-void DrawLine(pair<int, int> p0, pair<int, int>p1, int r, int g, int b, Mat& img)
+void DrawLine(pair<int, int> p0, pair<int, int>p1, Vec3b Pixel, Mat& img)
 {
 	float m = 0.0f;
 	if (p1.second != p0.second)
@@ -29,9 +29,7 @@ void DrawLine(pair<int, int> p0, pair<int, int>p1, int r, int g, int b, Mat& img
 		for (int x = p0.second; x < p1.second; x++)
 		{
 			float y = m * (float)x + slope;
-			img.at<Vec3b>((int)y, x)[0] = b;
-			img.at<Vec3b>((int)y, x)[1] = g;
-			img.at<Vec3b>((int)y, x)[2] = r;
+			img.at<Vec3b>((int)y, x) = Pixel;
 		}
 	}
 	else
@@ -45,9 +43,7 @@ void DrawLine(pair<int, int> p0, pair<int, int>p1, int r, int g, int b, Mat& img
 		for (int y = p0.first; y < p1.first; y++)
 		{
 			float x = w * (float)y + p;
-			img.at<Vec3b>(y, (int)x)[0] = b;
-			img.at<Vec3b>(y, (int)x)[1] = g;
-			img.at<Vec3b>(y, (int)x)[2] = r;
+			img.at<Vec3b>(y, (int)x) = Pixel;
 		}
 	}
 }
