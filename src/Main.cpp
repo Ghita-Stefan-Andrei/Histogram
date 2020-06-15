@@ -10,6 +10,11 @@
 #define FirstARG 1
 int main(int argc, char* argv[])
 {
+	if (argc == 1)
+	{
+		cout << " Trebuie specificata o comanda cum ar fi \"help\" sau introdus numele imagini";
+		return 0;
+	}
 	string command = convert<char*, string>(argv[FirstARG]);
 	if (command == "help")
 	{
@@ -20,6 +25,11 @@ int main(int argc, char* argv[])
 	else
 	{
 		Mat img = imread(command, IMREAD_COLOR);
+		if (img.empty())
+		{
+			cout << " Imaginea nu a fost incarcata";
+			return 0;
+		}
 		Mat grey(img.rows, img.cols, CV_8UC3);
 		cvtColor(img, grey, COLOR_BGR2GRAY);
 
@@ -54,12 +64,12 @@ int main(int argc, char* argv[])
 		CreateVecForHist(green, g_hist, allGreenp);
 		CreateVecForHist(grey_v, gr_hist, allGreyp);
 
-		for (int i = 0; i < allBluep.size() - 1; i++)
+		for (double i = 0; i < allBluep.size() - 1; i++)
 		{
-			DrawLine(allBluep[i], allBluep[(double)i + 1], BluePixel_Vec3b, b_hist);
-			DrawLine(allRedp[i], allRedp[(double)i + 1], RedPixel_Vec3b, r_hist);
-			DrawLine(allGreenp[i], allGreenp[(double)i + 1], GreenPixel_Vec3b, g_hist);
-			DrawLine(allGreyp[i], allGreyp[(double)i + 1], BuildPixel_Vec3b(127, 127, 127), gr_hist);
+			DrawLine(allBluep[i], allBluep[i + 1], BluePixel_Vec3b, b_hist);
+			DrawLine(allRedp[i], allRedp[i + 1], RedPixel_Vec3b, r_hist);
+			DrawLine(allGreenp[i], allGreenp[i + 1], GreenPixel_Vec3b, g_hist);
+			DrawLine(allGreyp[i], allGreyp[i + 1], BuildPixel_Vec3b(127, 127, 127), gr_hist);
 		}
 
 		showImg("Img", img, 100, 100, img.cols, img.rows);
@@ -71,6 +81,6 @@ int main(int argc, char* argv[])
 
 		waitKey();
 		destroyAllWindows();
+		return 0;
 	}
-	return 0;
 }
