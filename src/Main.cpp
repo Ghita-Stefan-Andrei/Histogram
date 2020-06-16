@@ -10,7 +10,7 @@
 #define FirstARG 1
 int main(int argc, char* argv[])
 {
-	if (argc == 1)
+	if (argc != 2)
 	{
 		cout << " Trebuie specificata o comanda cum ar fi \"help\" sau introdus numele imagini";
 		return 0;
@@ -20,6 +20,7 @@ int main(int argc, char* argv[])
 	{
 		cout << " Aceasta aplicatie este facuta de Ghita Stefan Andrei" << endl;
 		cout << " Pt a afisa histogramele unei imagini scrieti numele acesteia si extensia (nume_img.extensie)" << endl;
+		cout << " Lista comenzi disponibile: \n help";
 		return 0;
 	}
 	else
